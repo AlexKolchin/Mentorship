@@ -8,6 +8,7 @@ class rows():
                 if len(word) != 1 and word[i - 1] == word[i]:
                     new_list += [word]
                     input_text = input_text.replace(word, '')
+        #last_list = set(new_list)
         last_list = []
         for elem in new_list:
             if elem not in last_list:
@@ -35,23 +36,29 @@ class rows():
                 last_word = ''.join(new_list)
                 input_text = input_text.replace(word, last_word)
         print(f'Видалено середню букву | {input_text}')
+        #print(word[:3]+word[4:])
 
     def find_simmetric(input_text):
         text = re.findall("[a-zа-яєїі']+", input_text, flags=re.IGNORECASE)
         new_list = []
         for word in text:
+            flag = False
             for i in range(0, len(word)):
-                if len(word) % 2 == 0 and len(word) >= 4:
-                    if word[i] == word[-1 - i]:
-                        new_list.append(word)
-        last_list = []
+                if word[i] == word[-1 - i]:
+                    flag = True
+                else:
+                    flag = False
+                    break
+            if flag == True:
+                new_list.append(word)
+        """last_list = []
         for elem in new_list:
             if elem not in last_list:
-                last_list.append(elem)
+                last_list.append(elem)"""
         print('Симетричні слова | ', end='')
-        print(' '.join(last_list))
+        print(' '.join(new_list))
 
-input_text = """ Прийшла оссіння пора, ллє як з відра, хитаються дерева і чути гудіння!, сінніс - trccrt"""
+input_text = """ Прийшла оссіння пора, ллє як з відра, хитаються дерева і чути гудіння!, сінніс - trccrt abca"""
 input_text1 = '''abcd, abba, abccba - abc, zzz , sss'''
 input_text2 = '''abcd, abba, fjdk, fdfhdj abccba - abc'''
 rows.repeat_letter(input_text)
